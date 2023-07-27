@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# print files in specific format
+for file in *
+do
+    # Check if the file is not hidden (does not start with a dot)
+    if [[ ! "$file" == .* ]]; then
+        # extract part of interest using param expansion
+        needed_name="${file#*-}"
+        echo "$needed_name"
+    fi
+done
+
