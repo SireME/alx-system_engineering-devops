@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# display numbers based on conditions using bash case statement structure
+hour_counter=0
+minute_counter=1
+while((hour_counter <= 12))
+do
+   echo "Hour: $hour_counter"
+   while((minute_counter <= 59))
+   do
+	   echo "$minute_counter"
+	   ((minute_counter++))
+   done
+   minute_counter=1 # initialise minute counter back to 1 for next iteration
+   ((hour_counter++))
+done
