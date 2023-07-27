@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# acript o print best school 10x using while loop
+counter=1
+while((counter <= 10))
+do
+   echo "Best School"
+   if ((counter == 9))
+   then
+	   echo "Hi"
+   fi
+   ((counter++))
+done
