@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#list the pid of bash without pid call
+pgrep -l bash
