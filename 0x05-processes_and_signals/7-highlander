@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# display to To infinity and beyond with sigterm handling
+
+# function to call on signal
+function sigterm_handler(){
+	echo "I am invincible!!!"
+}
+
+# sigterm handler
+trap sigterm_handler SIGTERM
+
+while ((1 == 1)); do
+     echo "To infinity and beyond"
+     sleep 2
+done
