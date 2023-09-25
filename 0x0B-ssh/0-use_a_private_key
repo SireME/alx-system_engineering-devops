@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# bash script to authenticate to server using specifci file
+
+ssh -i ~/.ssh/school ubuntu@52.205.91.64
