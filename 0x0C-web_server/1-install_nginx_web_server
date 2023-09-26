@@ -5,17 +5,8 @@
 sudo apt-get -y update
 sudo apt-get -y install nginx
 
-# assign ownership to nginx
-# sudo chown -R "$USER":"$USER" /var/www/html
-
-# set appropriate permissions to loaction
-# sudo chmod -R 755 /var/www
-
 # create sample page in location
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
-
-# Modify nginx default listening port to 80
-# sudo sed -i 's/listen [0-9]*;/listen 80;/' /etc/nginx/sites-available/default
 
 # start ngnx service 
 sudo service nginx start
