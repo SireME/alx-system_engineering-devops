@@ -2,19 +2,19 @@
 # setup install and setup nginx web server with default page
 
 #  install nginx in non interactive mode
-apt-get -y install nginx
+sudo apt-get -y install nginx
 
 # assign ownership to nginx
-chown -R "$USER":"$USER" /var/www/html
+sudo chown -R "$USER":"$USER" /var/www/html
 
 # set appropriate permissions to loaction
-chmod -R 755 /var/www
+sudo chmod -R 755 /var/www
 
 # create sample page in location
-echo "Hello World!" > /var/www/html/index.html
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
 
 # Modify nginx default listening port to 80
-sed -i 's/listen [0-9]*;/listen 80;/' /etc/nginx/sites-available/default
+sudo sed -i 's/listen [0-9]*;/listen 80;/' /etc/nginx/sites-available/default
 
 # start ngnx service 
-service nginx start
+sudo service nginx start
