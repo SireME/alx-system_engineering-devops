@@ -21,7 +21,7 @@ nginx::resource::server { 'default_server':
 nginx::resource::location { 'redirect_me':
   location       => '/redirect_me',
   server         => 'default_server',
-  redirect       => 'http://$host/',
+  redirect       => 'http://52.205.91.64/',
   http_ensure    => '301',
 }
 
