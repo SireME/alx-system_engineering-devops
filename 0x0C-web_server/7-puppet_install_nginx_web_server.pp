@@ -29,7 +29,7 @@ nginx::resource::location { 'redirect_me':
 # create the root index.html with "Hello World!" content
 file { '/var/www/html/index.html':
   ensure  => file,
-  content => '<h1>Hello World!</h1>',
+  content => 'Hello World!',
   owner   => 'root',
   group   => 'root',
   mode    => '0644',
