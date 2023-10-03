@@ -30,6 +30,6 @@ server="server {
 }"
 
 # replace configurations
-sudo echo > /etc/nginx/sites-available/default
+sudo echo '$server'> /etc/nginx/sites-available/default
 
 sudo service nginx restart
