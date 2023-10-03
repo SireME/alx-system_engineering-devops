@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# setup install and setup nginx web server with default page
+
+#  install nginx in non interactive mode
+sudo apt-get -y update
+sudo apt-get -y install nginx
+
+# create sample page in location
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+
+# add a 301 redirect to somewhere else
+sudo sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.wikipedia.com/ permanent;' /etc/nginx/sites-available/default
+# start ngnx service 
+sudo service nginx start
