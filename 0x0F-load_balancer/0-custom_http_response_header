@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# This script intstalls nginx with default configurations
+
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get install -y nginx
+
+# default page setup and configs
+mkdir -p /var/www/html
+echo "Hello World!" > /var/www/html/index.html
+echo "Ceci n'est pas une page" > /var/www/html/custom404.html
+
+# server configurations
+server="server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    add_header X-Served-By $HOSTNAME;
+    root   /var/www/html;
+    index  index.html index.htm;
+
+    location /redirect_me {
+        return 301 https://wikipedia.com/;
+    }
+
+    error_page 404 /custom404.html;
+    location /404 {
+      root /var/www/html;
+      internal;
+    }
+}"
+
+# replace configurations
+sudo echo > /etc/nginx/sites-available/default
+
+sudo service nginx restart
