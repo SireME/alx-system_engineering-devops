@@ -9,9 +9,6 @@ sudo apt-get -y install nginx
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
 
 # add a 301 redirect to somewhere else
-sudo sed -i '/listen 80 default_server/a \
-location /redirect_me { \
-    rewrite ^/redirect_me https://www.wikipedia.com/ permanent; \
-}' /etc/nginx/sites-available/default
+sudo sed -i '/listen 80 default_server/a location /redirect_me { rewrite ^/redirect_me https://www.wikipedia.com/ permanent; }' /etc/nginx/sites-available/default
 # start ngnx service 
-sudo service nginx start
+sudo service nginx reload
