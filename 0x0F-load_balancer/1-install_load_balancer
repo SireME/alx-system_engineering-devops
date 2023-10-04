@@ -21,8 +21,8 @@ frontend http
 # Backend configuration
 backend web-backend
     mode http
-    server 229284-web-01 52.205.91.64:80
-    server 229284-web-02 54.160.105.186:80
+    server 229284-web-01 52.205.91.64:80 check
+    server 229284-web-02 54.160.105.186:80 check
 EOL
 
 # Enable and start HAProxy service
