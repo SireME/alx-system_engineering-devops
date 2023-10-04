@@ -1,19 +1,29 @@
 #!/usr/bin/env bash
-# This script intstalls nginx with default configurations
+# This script installs HAProxy with basic configurations using the 'service' command
 
+# Install HAProxy
 sudo apt update -y
 sudo apt install haproxy -y
 
-# add frontend to file
-sudo printf "frontend http\n" > /etc/haproxy/haproxy.cfg
-sudo printf "\t\tbind *:80\n" >> /etc/haproxy/haproxy.cfg
-sudo printf "\t\tmode http\n" >> /etc/haproxy/haproxy.cfg
-sudo printf "\t\tdefault_backend web-backend\n" >> /etc/haproxy/haproxy.cfg
+# Backup the original HAProxy configuration file
+sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
 
-#configure nackend
-sudo printf "backend  web_backend\n" > /etc/haproxy/haproxy.cfg
-sudo printf "\t\tmode http" >> /etc/haproxy/haproxy.cfg
-sudo printf "\t\tserver 229284-web-01 52.205.91.64:80\n" >> /etc/haproxy/haproxy.cfg
-sudo printf "\t\tserver 229284-web-01 54.160.105.186:80\n" >> /etc/haproxy/haproxy.cfg
+# Create a new HAProxy configuration file
+sudo tee /etc/haproxy/haproxy.cfg > /dev/null <<EOL
+# HAProxy Configuration
 
+# Frontend configuration
+frontend http
+    bind *:80
+    mode http
+    default_backend web-backend
+
+# Backend configuration
+backend web-backend
+    mode http
+    server server1 52.205.91.64:80
+    server server2 54.160.105.186:80
+EOL
+
+# Restart HAProxy service to apply changes
 sudo service haproxy restart
