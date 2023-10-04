@@ -26,5 +26,4 @@ backend web-backend
 EOL
 
 # Enable and start HAProxy service
-sudo systemctl enable haproxy
-sudo systemctl start haproxy
+service haproxy restart
