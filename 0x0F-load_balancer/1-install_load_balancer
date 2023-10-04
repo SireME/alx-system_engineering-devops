@@ -21,9 +21,10 @@ frontend http
 # Backend configuration
 backend web-backend
     mode http
-    server server1 52.205.91.64:80
-    server server2 54.160.105.186:80
+    server 229284-web-01 52.205.91.64:80
+    server 229284-web-02 54.160.105.186:80
 EOL
 
-# Restart HAProxy service to apply changes
-sudo service haproxy restart
+# Enable and start HAProxy service
+sudo systemctl enable haproxy
+sudo systemctl start haproxy
