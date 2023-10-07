@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# script to print domain name information
+
+domainonly() {
+	for sub in "www" "lb-01" "web-01" "web-02"; do
+		url=$1
+		result=$(dig "$sub"".""$url" | grep ^"$sub")
+		record=$(echo "$result" | awk '{print $4}')
+		ip=$(echo "$result" | awk '{print $5}')
+		echo "The subdomain $sub is a $record record and points to $ip"
+	done
+}
+
+domain_and_sub() {
+	url=$1
+	sub=$2
+	result=$(dig "$sub"".""$url" | grep ^"$sub")
+        record=$(echo "$result" | awk '{print $4}')
+        ip=$(echo "$result" | awk '{print $5}')
+        echo "The subdomain $sub is a $record record and points to $ip"
+}
+
+# call appropriate function based on input arguments
+if [ $# -eq 1 ]; then
+	domainonly "$1"
+elif [ "$#" -eq 2 ]; then
+	domain_and_sub "$1" "$2"
+fi
