@@ -1,0 +1,19 @@
+# HAProxy Configuration
+
+#configuration to handle https requests
+frontend https
+    bind *:443 ssl crt /etc/ssl/private/www.z-innovate.tech.pem
+    mode http
+    default_backend web-backend
+
+# Frontend configuration
+frontend http
+    bind *:80
+    mode http
+    default_backend web-backend
+
+# Backend configuration
+backend web-backend
+    mode http
+    server 229284-web-01 52.205.91.64:80 check
+    server 229284-web-02 54.160.105.186:80 check
