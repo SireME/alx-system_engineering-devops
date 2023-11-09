@@ -1,24 +1,6 @@
-# 0-strace_is_your_friend.pp
+# fix wordpress settings extension
 
-# Define an Apache site resource to configure the virtual host.
-file { '/etc/apache2/sites-available/your_site.conf':
-  ensure  => present,
-  content => "
-    <VirtualHost *:80>
-        ServerName your_server_name
-        DocumentRoot /var/www/your_document_root
-        # Add your configuration directives here
-    </VirtualHost>
-  ",
+exec { 'fix-wordpress':
+  command => 'sed -i s/phpp/php/g /var/www/html/wp-settings.php',
+  path    => '/usr/local/bin/:/bin/'
 }
-
-# Ensure the virtual host configuration file is enabled.
-# # note : your_site is a placeholder
-apache::vhost { 'your_site':
-  vhost_name    => 'your_server_name',
-  docroot       => '/var/www/your_document_root',
-  priority      => 10,
-  override      => 'All',
-  vhost_aliases => [],
-}
-
