@@ -1,0 +1,31 @@
+server {
+    listen 80;
+    server_name 52.205.91.64;
+    add_header X-Served-By 229284-web-01;
+
+    location /airbnb-onepage/ {
+        include proxy_params;
+        proxy_pass http://127.0.0.1:5000/airbnb-onepage/;
+    }
+
+    location ~ /airbnb-dynamic/number_odd_or_even/(\d+)$ {
+        include proxy_params;
+        proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
+    }
+    
+    # Serving API on AirBnB_clone_v3
+    location /api/ {
+        proxy_pass http://127.0.0.1:5002/api/;
+    }
+    
+    # root point to gunicorn frontend 
+    location / {
+       proxy_pass http://127.0.0.1:5003/2-hbnb;
+    }
+
+    #serve static files
+    location /static/ {
+        alias /home/ubuntu/AirBnB_clone_v4/web_flask/static/;
+    }
+ 
+}
