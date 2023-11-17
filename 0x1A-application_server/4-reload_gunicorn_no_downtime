@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# bash script to gracefully reload gunicorn 
+
+# Get the process IDs of the Gunicorn workers
+worker_pids=$(pgrep -f "gunicorn --bind 0.0.0.0:8001 --workers 4 web_flask.0-hello_route:app")
+
+# Output the current Gunicorn processes
+# echo "Before reloading Gunicorn:"
+ps auxf | grep gunicorn
+
+# Send a graceful reload signal to the Gunicorn master process
+kill -s HUP $(pgrep -f "gunicorn --bind 0.0.0.0:8001 --workers 4 web_flask.0-hello_route:app")
+
+# Wait for the workers to finish processing
+sleep 2
+
+# Output the Gunicorn processes after reloading
+# echo "After reloading Gunicorn:"
+ps auxf | grep gunicorn
+
